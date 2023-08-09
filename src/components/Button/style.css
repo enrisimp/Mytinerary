@@ -1,0 +1,52 @@
+.button {
+  align-items: flex-start;
+  display: inline-flex;
+  position: relative;
+}
+
+.button .div {
+  position: relative;
+}
+
+.button .button-i {
+  color: var(--titlecolor);
+  font-family: "Poppins", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 28.8px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.button.default {
+  background-color: var(--primary);
+  border-radius: 8px;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.button.line .div {
+  align-items: flex-start;
+  border: 1px solid;
+  border-color: var(--primary);
+  border-radius: 8px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.button.default .div {
+  color: #ffffff;
+  font-family: "Poppins", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 28.8px;
+  margin-top: -1px;
+  white-space: nowrap;
+  width: fit-content;
+}

@@ -1,0 +1,94 @@
+.home {
+  background-color: #ebebeb;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.home .div-2 {
+  background-color: #ebebeb;
+  border: 1px none;
+  height: 1117px;
+  position: relative;
+  width: 1728px;
+}
+
+.home .hero {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  left: 219px;
+  position: absolute;
+  top: 414px;
+  width: 1291px;
+}
+
+.home .text {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  position: relative;
+  width: 742px;
+}
+
+.home .h-1 {
+  align-self: stretch;
+  color: var(--black);
+  font-family: var(--h-1-font-family);
+  font-size: var(--h-1-font-size);
+  font-style: var(--h-1-font-style);
+  font-weight: var(--h-1-font-weight);
+  letter-spacing: var(--h-1-letter-spacing);
+  line-height: var(--h-1-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.home .p {
+  color: var(--grey-p);
+  font-family: var(--parrafo-font-family);
+  font-size: var(--parrafo-font-size);
+  font-style: var(--parrafo-font-style);
+  font-weight: var(--parrafo-font-weight);
+  letter-spacing: var(--parrafo-letter-spacing);
+  line-height: var(--parrafo-line-height);
+  position: relative;
+  width: 628px;
+}
+
+.home .button-instance {
+  align-items: center !important;
+  background-color: var(--prima) !important;
+  display: flex !important;
+  flex: 0 0 auto !important;
+  gap: 16px !important;
+  justify-content: center !important;
+  padding: 16px 20px !important;
+  width: 346px !important;
+}
+
+.home .design-component-instance-node {
+  font-family: var(--parrafo-font-family) !important;
+  font-size: var(--parrafo-font-size) !important;
+  font-style: var(--parrafo-font-style) !important;
+  font-weight: var(--parrafo-font-weight) !important;
+  letter-spacing: var(--parrafo-letter-spacing) !important;
+  line-height: var(--parrafo-line-height) !important;
+  white-space: unset !important;
+}
+
+.home .frame {
+  height: 200px;
+  position: relative;
+  width: 308px;
+}
+
+.home .header-instance {
+  background-color: transparent !important;
+  left: 219px !important;
+  position: absolute !important;
+  top: 32px !important;
+}
