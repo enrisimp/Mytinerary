@@ -1,11 +1,29 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
+/**
+ * Button component that renders a button and navigates to the '/cities' route when clicked.
+ */
 const Button = () => {
-  return (
-    // <div className='flex flex-1 items-center justify-center mt-10'>
-        <button className='mx-auto hover:translate-y-3 w-1/2 h-24 flex items-center justify-center transition-all duration-500 hover:scale-110 font-bold text-4xl border border-gray-700 hover:border-white bg-white hover:bg-transparent hover:text-white rounded-xl'>Ver todos los eventos</button>
-    // </div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Button
+  /**
+   * Handles the click event of the button and navigates to the '/cities' route.
+   */
+  const handleClick = () => {
+    navigate('/cities');
+  };
+
+  return (
+    <div className='flex flex-1 items-center justify-center mt-10'>
+      <button
+        onClick={handleClick}
+        className="dark:bg-white dark:hover:bg-gray-400 dark:hover:text-gray-100 dark:text-gray-800 w-full sm:w-auto mt-8 text-base text-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none hover:bg-gray-700 font-medium leading-none text-white py-4 px-8 bg-gray-800"
+      >
+        Visit Cities
+      </button>
+    </div>
+  );
+};
+
+export default Button;
