@@ -14,7 +14,7 @@ const Cities = () => {
       className="w-full h-screen flex justify-center items-center bg-center bg-no-repeat"
       style={{
         backgroundImage:
-          'url("../../public/work-in-progress-website-hd-png.png")',
+          'url("./work.png")',
       }}
     ></div>
   );

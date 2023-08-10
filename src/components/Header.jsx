@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
-import logoBlue from '../../public/logoBlue.png';
-import { UserIcon } from '@heroicons/react/24/solid';
+import React, { useState } from "react";
+import logoBlue from "/logoBlue.png";
+import { UserIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 
-/**
- * Header is a React component that renders a responsive navigation bar.
- * It includes a logo, a menu with links, and a login button.
- * The menu can be toggled on smaller screens by clicking on a hamburger icon.
- */
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const menuItems = [
     { label: "Home", path: "/", id: "1", active: true },
     { label: "Cities", path: "/cities", id: "2", active: false },
   ];
 
-  /**
-   * Toggles the visibility of the menu items.
-   */
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleCitiesClick = () => {
+    navigate("/cities"); // Navigate to the '/cities' route
   };
 
   return (
@@ -39,7 +37,6 @@ const Header = () => {
             My Tinerary
           </div>
         </div>
-        {/* Hamburger menu for smaller screens */}
         <div className="lg:hidden text-center ml-auto">
           <div
             className="cursor-pointer text-white text-3xl"
@@ -48,7 +45,6 @@ const Header = () => {
             ☰
           </div>
         </div>
-        {/* Links for larger screens */}
         <div
           className={`lg:flex ${
             showMenu ? "flex" : "hidden"
@@ -65,12 +61,12 @@ const Header = () => {
               {item.label}
             </a>
           ))}
-          <a
-            href="#"
-            className="block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
+          <button
+            onClick={handleCitiesClick}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
           >
             <UserIcon className="w-6 h-6 mr-2" /> Login
-          </a>
+          </button>
         </div>
       </div>
     </nav>
