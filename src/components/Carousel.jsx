@@ -75,7 +75,7 @@ content: 'Cairo Citadel',
 },
 
 ];
-const CarouselComponent = () => {
+const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [];
@@ -200,4 +200,4 @@ const CarouselComponent = () => {
   );
 };
 
-export default CarouselComponent;
+export default Carousel;
