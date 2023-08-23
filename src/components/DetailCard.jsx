@@ -3,10 +3,9 @@ import React from "react";
 const DetailCard = ({ city }) => {
   return (
     <div className="card">
-      <img src={city.photo} alt={city.name} className="card-img-top" />
+      <img src={city.photo} alt={city.city} className="card-img-top" />
       <div className="card-body">
-        <h5 className="card-title">{city.name}</h5>
-        <p>city: {city.city}</p>
+        <h5 className="card-title">{city.city}</h5>
         <p>Country: {city.country}</p>
         <p>Foundation: {city.foundation}</p>
         <p>Population: {city.population}</p>

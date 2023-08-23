@@ -4,8 +4,10 @@
 
 body {
   background-image: url('../nature.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100%;
+  background-size: 100% auto; /* Scale width to 100% and maintain aspect ratio */
+  background-repeat: repeat;
+  background-position: center top; /* Align to top */
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the body height to full viewport height */
 }
