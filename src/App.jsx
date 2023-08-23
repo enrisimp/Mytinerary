@@ -4,39 +4,40 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
 import Cities from './pages/Cities';
+import City from './pages/City';
 import Componente404 from './pages/Componente404';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: "/",
+        element: <Home />,
       },
       {
-        path: '/cities',
-        element: <Cities />
+        path: "/cities",
+        element: <Cities />,
       },
       {
-        path: '*',
-        element: <Componente404 />
-      }
-    ]
+        path: "/cities/:id",
+        element: <City />,
+      },
+      {
+        path: "*",
+        element: <Componente404 />,
+      },
+    ],
   },
-
-])
+]);
 
 
 function App() {
 
-
   return (
-    // <MainLayout>
     <RouterProvider router={router} />
-    // {/* <Home /> */}
-    // {/* </MainLayout> */}
+
   )
 }
 
