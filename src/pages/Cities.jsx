@@ -1,12 +1,26 @@
 import React, { useEffect, useState, useRef } from "react";
 import CardCity from "../components/CardCity";
 import { getAllCities } from "../services/cityService.jsx";
+import {
+  getCities,
+  filterCities,
+  getCitiesAsync,
+} from "../redux/actions/citiesActions.js";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Cities = () => {
   const [data, setData] = useState([]);
   const inputBusqueda = useRef(null);
 
+    const dispatch = useDispatch();
+
+    const { filteredCities: cities, allCities } = useSelector(
+      (store) => store.cities
+    );
+
   useEffect(() => {
+    dispatch(getCitiesAsync());
     getAllCities()
       .then((responseData) => {
         setData(responseData);
@@ -17,6 +31,7 @@ const Cities = () => {
   }, []);
 
   const handleInput = () => {
+    /*
     const search = inputBusqueda.current.value;
     let query = `?`;
     if (search) {
@@ -28,7 +43,9 @@ const Cities = () => {
       })
       .catch((error) => {
         console.log("Error fetching filtered data:", error);
-      });
+      }); 
+      */
+      dispatch(filterCities(select.current.value, inputBusqueda.current.value));
   };
 
   return (

@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
 import Cities from './pages/Cities';
 import City from './pages/City';
+import Itinerary from './pages/Itinerary';
+import Itineraries from "./pages/Itineraries";
 import Componente404 from './pages/Componente404';
 
 const router = createBrowserRouter([
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/cities/:id",
         element: <City />,
+      },
+      {
+        path: "/itineraries",
+        element: <Itineraries />,
+      },
+      {
+        path: "/itineraries/:idItinerary",
+        element: <Itinerary />,
       },
       {
         path: "*",

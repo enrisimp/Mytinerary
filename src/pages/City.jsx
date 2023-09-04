@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 // import DetailCard from "../components/DetailCard.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { getCityAsync } from "../redux/actions/citiesActions";
 
 const City = () => {
     const navigate = useNavigate();
@@ -11,6 +13,14 @@ const City = () => {
     const handleClick = () => {
       navigate("/cities");
   };
+
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const city = useSelector((store) => store.cities.city);
+  
+    useEffect(() => {
+      dispatch(getCityAsync(id));
+    }, []);
   
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -24,6 +34,15 @@ const City = () => {
             alt="City"
             className="mx-auto"
           />
+
+          {city ? (
+            <div>
+              {" "}
+              <h1> {city.name} </h1> <img src={city.image} />
+            </div>
+          ) : (
+            <h2> No City </h2>
+          )}
           {/* <Link to="/cities" className="btn btn-blue mt-4">
             Back to Cities
           </Link> */}
