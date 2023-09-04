@@ -8,16 +8,14 @@ import {
 } from "../redux/actions/citiesActions.js";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
-
 const Cities = () => {
   const [data, setData] = useState([]);
-  const inputBusqueda = useRef(null);
+  const inputValue = useRef(null);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-const { filteredCities } = useSelector((store) => store.cities);
+  const { filteredCities } = useSelector((store) => store.cities);
+  // console.log("Filtered Cities:", filteredCities); // Check if filteredCities is being updated.
 
   useEffect(() => {
     dispatch(getCitiesAsync());
@@ -32,7 +30,7 @@ const { filteredCities } = useSelector((store) => store.cities);
 
   const handleInput = () => {
     /*
-    const search = inputBusqueda.current.value;
+    const search = inputValue.current.value;
     let query = `?`;
     if (search) {
       query += "city=" + search;
@@ -45,8 +43,9 @@ const { filteredCities } = useSelector((store) => store.cities);
         console.log("Error fetching filtered data:", error);
       }); 
       */
-    // dispatch(filterCities(select.current.value, inputBusqueda.current.value));
-    const search = inputBusqueda.current.value;
+    // dispatch(filterCities(select.current.value, inputValue.current.value));
+    const search = inputValue.current.value;
+    // console.log("Input value:", search);
     dispatch(filterCities(search));
   };
 
@@ -66,7 +65,7 @@ const { filteredCities } = useSelector((store) => store.cities);
           className="form-control"
           placeholder="Enter city name..."
           onInput={handleInput}
-          ref={inputBusqueda}
+          ref={inputValue}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">

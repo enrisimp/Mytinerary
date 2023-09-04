@@ -37,7 +37,8 @@ const Itinerary = (props) => {
             {itinerary.duration}
           </p>
           <p>
-            <span className="font-semibold">Likes:</span> {likes}{" "}
+            <span className="font-semibold">Likes:</span>{" "}
+            {likes}{" "}
             <span
               role="img"
               aria-label="heart"

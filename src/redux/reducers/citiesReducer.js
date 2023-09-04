@@ -25,9 +25,11 @@ export const citiesReducer = createReducer(initialState, (builder) =>
     })
     .addCase(filterCities, (stateActual, action) => {
       const inputValue = action.payload.inputValue;
+      // console.log('input reducer: ', inputValue)
       if (inputValue) {
         const filteredSearch = stateActual.allCities.filter((city) =>
-          city.name.toLowerCase().includes(inputValue.toLowerCase())
+          // city.city.toLowerCase().includes(inputValue.toLowerCase())
+          city.city.toLowerCase().startsWith(inputValue.toLowerCase())
         );
         return {
           ...stateActual,

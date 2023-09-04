@@ -34,16 +34,14 @@ export const getCitiesAsync = createAsyncThunk(
 // });
 
 
-export const filterCities = createAction(
-  "filter_cities",
-  (category, search) => {
-    return {
-      payload: {
-        inputValue: search,
-      },
-    };
-  }
-);
+export const filterCities = createAction("filter_cities", (search) => {
+  return {
+    payload: {
+      inputValue: search,
+    },
+  };
+});
+
 
 export const getCityAsync = createAsyncThunk("get_city", async (id) => {
   const petition = await axios("http://localhost:8000/api/cities/" + id);
