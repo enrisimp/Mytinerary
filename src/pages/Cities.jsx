@@ -9,15 +9,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 
+
+
 const Cities = () => {
   const [data, setData] = useState([]);
   const inputBusqueda = useRef(null);
 
     const dispatch = useDispatch();
 
-    const { filteredCities: cities, allCities } = useSelector(
-      (store) => store.cities
-    );
+const { filteredCities } = useSelector((store) => store.cities);
 
   useEffect(() => {
     dispatch(getCitiesAsync());
@@ -45,7 +45,9 @@ const Cities = () => {
         console.log("Error fetching filtered data:", error);
       }); 
       */
-      dispatch(filterCities(select.current.value, inputBusqueda.current.value));
+    // dispatch(filterCities(select.current.value, inputBusqueda.current.value));
+    const search = inputBusqueda.current.value;
+    dispatch(filterCities(search));
   };
 
   return (
@@ -68,10 +70,18 @@ const Cities = () => {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        {/*        
         {data.length === 0 && (
           <p className="col-span-full text-center">No cities found.</p>
         )}
         {data.map((item) => (
+          <CardCity key={item._id} city={item} />
+        ))}
+         */}
+        {filteredCities.length === 0 && (
+          <p className="col-span-full text-center">No cities found.</p>
+        )}
+        {filteredCities.map((item) => (
           <CardCity key={item._id} city={item} />
         ))}
       </div>

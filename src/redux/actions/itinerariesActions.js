@@ -1,23 +1,23 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getItinerarys = createAsyncThunk(
-  "get_cagategorias",
+export const getItineraries = createAsyncThunk(
+  "get_itineraries",
   async () => {
-    const peticion = await axios("http://localhost:4000/api/categories");
-    return peticion.data;
+    const petition = await axios("http://localhost:8000/api/itineraries");
+    return petition.data;
   }
 );
 
 export const getItinerary = createAsyncThunk(
-  "get_categoria",
+  "get_itinerary",
   async (id) => {
-    const peticion = await axios("http://localhost:4000/api/categories/" + id);
-    return peticion.data.category;
+    const petition = await axios("http://localhost:8000/api/itineraries/" + id);
+    return petition.data.itinerary;
   }
 );
 
-export const resetItinerary = createAction("reset_category", () => {
+export const resetItinerary = createAction("reset_itinerary", () => {
   return {
     payload: {},
   };
