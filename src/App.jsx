@@ -1,13 +1,21 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import MainLayout from './layouts/MainLayout';
-import Home from './pages/Home';
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
-import Cities from './pages/Cities';
-import City from './pages/City';
-import Itinerary from './pages/Itinerary';
+import { useEffect, useState } from "react";
+import "./App.css";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/Home";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
+import Cities from "./pages/Cities";
+import City from "./pages/City";
+import Itinerary from "./pages/Itinerary";
 import Itineraries from "./pages/Itineraries";
-import Componente404 from './pages/Componente404';
+import Componente404 from "./pages/Componente404";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import { useDispatch } from "react-redux";
+import { signInWithToken } from "./redux/actions/userActions";
 
 const router = createBrowserRouter([
   {
@@ -38,17 +46,30 @@ const router = createBrowserRouter([
         path: "*",
         element: <Componente404 />,
       },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
     ],
   },
 ]);
 
-
 function App() {
 
-  return (
-    <RouterProvider router={router} />
+  const dispatch = useDispatch()
 
-  )
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(signInWithToken());
+    }
+  }, []);
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
