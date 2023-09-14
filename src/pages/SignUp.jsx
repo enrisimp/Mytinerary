@@ -1,16 +1,17 @@
-import React, {
-  useRef, 
-  useEffect,
-   useState
-   } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { signUp } from "../redux/actions/userActions.js";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
+// import GoogleLoginButton  from
+
 const SignUp = () => {
   const [countries, setCountries] = useState([]);
 
   const name = useRef(null);
+  const lastname = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const image = useRef(null);
@@ -24,136 +25,198 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const handleSignUp = async () => {
-  //   dispatch(
-  //     register({
-  //       username: username.current.value,
-  //       password: password.current.value,
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const aux = [name, email, password, image, country];
+  //   if (aux.some((campo) => !campo.current.value)) {
+  //     alert("Todos los campos son obligatorios");
+  //   } else {
+  //     const body = {
   //       name: name.current.value,
-  //     })
-  //   );
-  //   navigate("/signin");
+  //       lastname: lastname.current.value,
+  //       email: email.current.value,
+  //       image: image.current.value,
+  //       password: password.current.value,
+  //       country: country.current.value,
+  //     };
+  //     dispatch(signUp(body));
+  //   }
   // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(e);
-    // if (!name.current.value) {
-    //   alert("el Nombre es requerido");
-    // }
-    const aux = { name, email, password, image, country }
-    if (aux.some(campo => !campo.current.value)) {
-      alert("todos los campos son obligatorios")
-    }
-    else {
+    const aux = [name, lastname, email, password, image, country];
+    if (aux.some((campo) => !campo.current.value)) {
+      alert("Todos los campos son obligatorios");
+    } else {
       const body = {
         name: name.current.value,
+        lastname: lastname.current.value,
         email: email.current.value,
         image: image.current.value,
         password: password.current.value,
         country: country.current.value,
-      }
-      // console.log(body);
-      dispatch(signUp(body));
-    }  
+      };
 
-    
-  }
+      
+      console.log("Form Data:", body); // Log the form data being submitted
+      dispatch(signUp(body))
+        .then((response) => {
+          console.log("Sign Up Response:", response); // Log the response from the backend
+          if (response.payload && response.payload.success) {
+            // Handle success
+            navigate("/");
+          } else {
+            // Handle error, if any
+            // You can also display an error message here
+            console.error("Sign Up Error:", response.payload.error);
+          }
+        })
+        .catch((error) => {
+          // Handle any exceptions or network errors here
+          console.error("Sign Up Error:", error);
+        });
+    }
+  };
+
+// const handleSubmitGoogle = async (credentialResponse) => {
+//   try {
+//     const infoUser = jwtDecode(credentialResponse.credential);
+//     const userData = {
+//       email: infoUser.email,
+//       name: infoUser.given_name,
+//       lastname: infoUser.family_name,
+//       image: infoUser.picture,
+//       password: infoUser.family_name + "_" + infoUser.sub,
+//       country: "Argentina", // You can set a default country here
+//     };
+//     await dispatch(signUp(userData));
+//     navigate("/");
+//   } catch (error) {
+//     console.error("Error while signing up with Google:", error);
+//   }
+  // };
+  
+  const handleSubmitGoogle = async (credentialResponse) => {
+    try {
+      const infoUser = jwtDecode(credentialResponse.credential);
+      const userData = {
+        email: infoUser.email,
+        name: infoUser.given_name,
+        lastname: infoUser.family_name,
+        image: infoUser.picture,
+        password:"Go" + infoUser.sub.substring(0, 8),
+        country: "Argentina", // You can set a default country here
+      };
+      console.log("Google Sign Up Data:", userData); // Log the Google Sign Up data being submitted
+      await dispatch(signUp(userData))
+        .then((response) => {
+          console.log("Google Sign Up Response:", response); // Log the response from the backend
+          if (response.payload && response.payload.success) {
+            // Handle success
+            navigate("/");
+          } else {
+            // Handle error, if any
+            // You can also display an error message here
+            console.error("Google Sign Up Error:", response.payload.error);
+          }
+        })
+        .catch((error) => {
+          // Handle any exceptions or network errors here
+          console.error("Google Sign Up Error:", error);
+        });
+    } catch (error) {
+      console.error("Error while signing up with Google:", error);
+    }
+  };
+
 
   return (
-    //     <div className="w-full flex justify-center items-center h-[80vh]">
-    //       <div className="form">
-    //         <div className="title">Welcome</div>
-    //         <div className="subtitle">Let's create your account!</div>
-
-    //         <div className="input-container ic1">
-    //           <input
-    //             ref={username}
-    //             placeholder=""
-    //             type="text"
-    //             className="input"
-    //             id="firstname"
-    //           />
-    //           <div className="cut"></div>
-    //           <label className="iLabel" htmlFor="firstname">
-    //             Username
-    //           </label>
-    //         </div>
-
-    //         <div className="input-container ic2">
-    //           <input
-    //             ref={password}
-    //             placeholder=""
-    //             type="text"
-    //             className="input"
-    //             id="lastname"
-    //           />
-    //           <div className="cut"></div>
-    //           <label className="iLabel" htmlFor="lastname">
-    //             Password
-    //           </label>
-    //         </div>
-    //         <div className="input-container ic2">
-    //           <input
-    //             ref={name}
-    //             placeholder=""
-    //             type="text"
-    //             className="input"
-    //             id="email"
-    //           />
-    //           <div className="cut cut-short"></div>
-    //           <label className="iLabel" htmlFor="email">
-    //             Name
-    //           </label>
-    //         </div>
-    //         <button className="submit" type="text" onClick={handleSignUp}>
-    //           Sign up
-    //         </button>
-    //       </div>
-    //     </div>
-    //   );
-    // };
-    <div className="d-flex col-1@ justify-center items-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}>
+        <GoogleLogin
+          onSuccess={handleSubmitGoogle}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+        {/* <GoogleLoginButton fn={handleSubmitGoogle} /> */}
+      </GoogleOAuthProvider>
       <form
-        className="d-flex flex-column gap-5 bg-gray-200 p-5"
+        className="mt-4 p-4 mx-auto max-w-sm bg-gray-200 rounded-lg"
         onSubmit={handleSubmit}
       >
-        <label>
-          {" "}
-          Name
-          <input type="text" name="" ref={name} required />
-        </label>
-        <label>
-          {" "}
-          email
-          <input type="email" name="" ref={email} />
-        </label>
-        <label>
-          {" "}
-          password
-          <input type="password" name="" ref={password} />
-        </label>
-        <label>
-          {" "}
-          Image
-          <input type="text" name="" ref={image} />
-        </label>
-        <label>
-          {" "}
-          Country
-          <select name="country" ref={country}>
+        <div className="mb-4">
+          <label className="block text-gray-600">Name</label>
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="name"
+            ref={name}
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-600">Lastname</label>
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="lastname"
+            ref={lastname}
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-600">Email</label>
+          <input
+            type="email"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="email"
+            ref={email}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-600">Password</label>
+          <input
+            type="password"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="password"
+            ref={password}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-600">Image</label>
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="image"
+            ref={image}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-600">Country</label>
+          <select
+            className="w-full p-2 border border-gray-300 rounded-md"
+            name="country"
+            ref={country}
+          >
             {countries.length > 0 &&
               countries.map((country) => (
-                <option key={`opt-country-$`} value={country}>
-                  {" "}
-                  {country}{" "}
+                <option key={`opt-country-${country}`} value={country}>
+                  {country}
                 </option>
               ))}
           </select>
-        </label>
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md"
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   );
-  };
-
+};
 
 export default SignUp;

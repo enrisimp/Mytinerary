@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import {
   createBrowserRouter,
   RouterProvider,
-  useNavigate,
+  // useNavigate,
 } from "react-router-dom";
 import Cities from "./pages/Cities";
 import City from "./pages/City";
@@ -67,7 +67,7 @@ function App() {
     if (token) {
       dispatch(signInWithToken());
     }
-  }, []);
+  }, );
 
   return <RouterProvider router={router} />;
 }

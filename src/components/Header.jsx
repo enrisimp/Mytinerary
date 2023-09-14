@@ -1,31 +1,29 @@
 import React, { useState } from "react";
 import logoBlue from "/logoBlue.png";
+import { useNavigate, Link } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useNavigate, Link } from "react-router-dom"; // Import the useNavigate hook
 import { useSelector, useDispatch } from "react-redux";
-import {logout} from "../redux/actions/userActions"
+import { logout } from "../redux/actions/userActions";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
-  const user = useSelector(store => store.user.user)
-  const dispatch = useDispatch()
+  const user = useSelector((store) => store.user.user);
+  const dispatch = useDispatch();
 
   const menuItems = [
     { label: "Home", path: "/", id: "1", active: true },
     { label: "Cities", path: "/cities", id: "2", active: false },
-    { label: "Sign in", path: "/signin", id: "3" },
-    { label: "Sign up", path: "/signup", id: "4" },
   ];
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleCitiesClick = () => {
-    navigate("/cities"); // Navigate to the '/cities' route
-  };
+  // const handleCitiesClick = () => {
+  //   navigate("/cities");
+  // };
 
   return (
     <nav className="bg-blue-900 bg-opacity-90 py-4">
@@ -69,22 +67,34 @@ const Header = () => {
             </a>
           ))}
           {user ? (
-            <button className="btn btn-primary" onClick={() => dispatch( logout() )}> Log Out</button>
+            <button
+              onClick={() => dispatch(logout())}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
+            >
+              <img
+                src={user.image}
+                alt="User Image"
+                className="w-6 h-6 mr-2 rounded-full"
+              />{" "}
+              Log Out
+            </button>
           ) : (
             <>
-              <Link to="/signup" className="btn btn-primary">SignUP</Link>
-              <Link to="/signin" className="btn btn-primary">SignIN</Link>
+              <Link
+                to="/signup"
+                className="text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
+              >
+                Sign UP
+              </Link>
+              <button
+                onClick={() => navigate("/signin")}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
+              >
+                <UserIcon className="w-6 h-6 mr-2" /> Login
+              </button>
             </>
-          )
-          }
-          <button
-            onClick={handleCitiesClick}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-4 py-2 lg:mt-0 lg:ml-4 rounded-lg flex items-center"
-          >
-            <UserIcon className="w-6 h-6 mr-2" /> Login
-          </button>
+          )}
         </div>
-          )
       </div>
     </nav>
   );
