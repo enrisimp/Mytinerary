@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getItinerary,
   resetItinerary,
-} from "../redux/actions/ItinerariesActions";
+} from "../redux/actions/itinerariesActions";
 import CardCity from "../components/CardCity";
 const Itinerary = () => {
   const { idItinerary } = useParams();
