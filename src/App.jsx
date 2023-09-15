@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import { useDispatch } from "react-redux";
 import { signInWithToken } from "./redux/actions/userActions";
+import ProtectedRoute from "./layouts/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +49,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: 
+          <ProtectedRoute>
+            <SignUp />
+          </ProtectedRoute>
+        ,
       },
       {
         path: "/signin",
-        element: <SignIn />,
+        element: 
+          <ProtectedRoute>
+            <SignIn />
+          </ProtectedRoute>
+        ,
       },
     ],
   },

@@ -8,6 +8,7 @@ import {
 const initialState = {
   user: null,
   token: null,
+  isOnline: false,
 };
 export const userReducer = createReducer(initialState, (builder) =>
   builder
@@ -16,6 +17,7 @@ export const userReducer = createReducer(initialState, (builder) =>
         ...stateActual,
         user: action.payload.user,
         token: action.payload.token,
+        isOnline: true,
       };
     })
     .addCase(signIn.fulfilled, (stateActual, action) => {
@@ -23,20 +25,27 @@ export const userReducer = createReducer(initialState, (builder) =>
         ...stateActual,
         user: action.payload.user,
         token: action.payload.token,
+        isOnline: true,
       };
     })
     .addCase(signInWithToken.fulfilled, (stateActual, action) => {
-      return {
-        ...stateActual,
-        user: action.payload.user,
-        token: action.payload.token,
-      };
+      if (action.payload.user) {
+        return {
+          ...stateActual,
+          user: action.payload.user,
+          token: action.payload.token,
+          isOnline: true,
+        };
+      } else {
+        return stateActual; // Keep the state unchanged if user is undefined
+      }
     })
     .addCase(logout, (stateActual, action) => {
       return {
         ...stateActual,
         user: null,
         token: null,
+        isOnline: false,
       };
     })
 );

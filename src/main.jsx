@@ -5,6 +5,9 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import "sweetalert2/src/sweetalert2.scss";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
