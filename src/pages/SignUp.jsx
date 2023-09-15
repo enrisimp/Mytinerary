@@ -59,7 +59,7 @@ const SignUp = () => {
         country: country.current.value,
       };
 
-      console.log("Form Data:", body); // Log the form data being submitted
+      // console.log("Form Data:", body); // Log the form data being submitted
       dispatch(signUp(body))
         .then((response) => {
           console.log("Sign Up Response:", response);
